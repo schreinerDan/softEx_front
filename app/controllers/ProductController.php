@@ -1,22 +1,21 @@
 <?php
 
-class ProductController
+class ProductController extends Controller
 {
     private $productService;
 
     public function __construct()
     {
-        $this->productService = new ProductService();
+        $this->service = new ProductService();
     }
 
     public function index()
     {
         
-        $products = json_decode($this->productService->getAllProducts());
-       
+        $products = json_decode($this->service->getAllProducts());
+        $this->set(['products'=>$products]);
+       $this->render("products","index");
         // Renderize a visualização passando os dados dos produtos
-        include "./views/products/index.php";
-
 
     }
 }
